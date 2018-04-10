@@ -1,0 +1,159 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+    <title>login</title>
+    
+      <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
+            <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/syntaxhighlighter/syntaxhighlighter.css" />
+
+            <style type="text/css">
+                .ui-layout-north {
+                    z-index:20 !important;
+                    overflow:visible !important;;
+                }
+              
+                /*.ui-corner-all {
+                    border-radius: 0px;
+                }
+                */
+                .ui-widget {
+                    /*font-family: Tahoma,Verdana,Segoe,sans-serif;*/
+                    font-size: 14px;
+                 }
+                 
+                 .ui-layout-unit{
+                     padding: 0.0em; 
+                 }
+
+              
+                .ui-panel ui-widget ui-widget-content ui-corner-all{
+                width: 30%; 
+                box-shadow: 3px 3px 15px 0.1px;
+                }
+                
+                 
+                 
+                
+            </style>
+</h:head>
+<h:body>
+    <p:layout fullPage="true" >
+        <p:layoutUnit id="center" position="center">
+             
+    <center>
+    <h:form>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+         <p:outputPanel id="login" > 
+        <h:panelGrid columns="1"  cellpadding="5">
+        <h:outputText style="font-size: 20px;" value="Sistema de Gerenciamento do Acervo do Herbário Municipal"/><br></br>
+        </h:panelGrid>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <p:panel header="Login" style="width:30%; box-shadow: 3px 3px 15px 0.1px #888888;padding: 0.5em;">
+          
+        <h:panelGrid columns="2"  cellpadding="5">
+        <h:outputText value="Usuário:" />
+        <p:inputText id="usuario" value="#{login.usuario}" required="true" 
+                     requiredMessage="É necessário informar o nome de usuário."></p:inputText>
+        <h:outputText value="Senha:" />
+        <p:password id="senha" value="#{login.senha}" required="true"
+                    requiredMessage="É necessário informar a senha." ></p:password >
+       </h:panelGrid>
+            <p:spacer height = "10"/>
+        <p:commandButton action="#{login.validateUsuarioSenha}" 
+            value="Entrar" styleClass="ui-priority-primary" 
+             ajax="true" update="login" 
+            
+             
+             ></p:commandButton>
+            
+             <!--
+             onstart="PF('statusLoginDialog').show()" oncomplete="PF('statusLoginDialog').hide()" 
+             -->
+         
+          </p:panel>
+         
+        <p:spacer height="30"/>
+         <p:messages id="msgsLogin" showSummary="false"  showDetail="true" style="width:45%"/>
+           
+        
+            </p:outputPanel>
+        <!--
+         <p:dialog   id="dialogoLoginStatus"  showEffect="fade" hideEffect="fade" widgetVar="statusLoginDialog"  modal="true" draggable="false" closable="false" resizable="false" showHeader="false" style="border: none;box-shadow: none;background-color: rgba(0, 0, 0, 0.0);">
+                  <h:panelGrid columns="1" cellpadding="5" >
+                      <h:outputText  style="font-size: 20px;text-align: center;" value="Carregando..." />
+                  <p:graphicImage   value="/image/loading.gif"   />
+                   </h:panelGrid> 
+               </p:dialog>
+          -->
+    
+    
+    
+    
+    
+    
+    </h:form>
+      
+        
+         <h:form>
+      
+      <p:dialog header="Alteração de senha" widgetVar="dlgAlteracaoSenha" resizable="false" modal="true">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="novaSenha" value="Nova senha:" />
+            <p:inputText id="username" value="#{login.novaSenha}"  />
+ 
+            <h:outputLabel for="repeteNovaSenha" value="Repetição da nova senha:" />
+            <p:password id="password" value="#{login.repeteNovaSenha}"  />
+ 
+            <f:facet name="footer">
+                <p:commandButton value="Confirmar"  actionListener="#{userLoginView.login}" />
+                <p:commandButton value="Cancelar" onclick="PF('dlgAlteracaoSenha').hide();" />
+            </f:facet>  
+        </h:panelGrid>
+    </p:dialog>
+             
+               </h:form>
+        
+       <br></br>
+       <br></br>
+       <br></br>
+       <br></br>
+            <br></br>
+                 <br></br>
+                  <br></br>
+       <br></br>
+       <br></br>
+       <br></br>
+            <br></br>
+            <h:panelGrid columns="1"  cellpadding="1" 
+                         style="text-align: center;
+                                position: absolute;
+                                bottom: 70px;
+                                left: 30%;
+                                width: 40%;">
+                
+                <p:graphicImage  value="/image/brasao.png"     />
+        <h:outputText value="Diretoria de Tecnologia da Informação"  />
+        
+             
+        <h:outputText value="Departamento de Desenvolvimento de Sistemas" />
+                 
+  
+        <h:outputText value="Prefeitura Municipal de São Leopoldo"  />
+                 </h:panelGrid> 
+        </center>
+                
+            </p:layoutUnit>
+        </p:layout>
+</h:body>
+     
+</html>

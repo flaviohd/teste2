@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+       <h:form id="listaPerfis">
+             <ui:component>
+            <center>
+                
+            
+             <p:panelGrid columns="1" layout="grid"  styleClass="painelOperacoes" >
+                 
+                   <p:panelGrid columns="3">
+                    
+                 <p:commandButton    icon="fa fa-file-text"   value="Incluir" id="btnIncluirPerfis"  action="#{perfilBean.preparaCadastro()}" actionListener="#{menuBean.setPagina('Perfis','detalhe','principal')}" 
+                                    update=":formularios"  
+                       onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+          <p:commandButton icon="fa fa-pencil-square-o"  value="Editar" id="btnEditarPerfis"  action="#{perfilBean.preparaAlteracao()}" actionListener="#{menuBean.setPagina('Perfis','detalhe','principal')}" update=":formularios"  
+                           onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+            
+          <p:commandButton icon="fa fa-trash" value="Excluir" id="btnExcluirPerfis" actionListener="#{perfilBean.excluir(actionEvent)}"
+                            update=":formularios"
+                           onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" > 
+                        
+                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+           </p:commandButton>
+        
+           </p:panelGrid> 
+                
+              
+                         <p:separator styleClass="separador"  />
+ 
+            
+ 
+                   
+                      <p:panelGrid columns="1"  > 
+                 <p:commandButton value="#{perfilBean.textoBotaoConsulta}"  icon="#{perfilBean.botaoIcone}" id="btnAlterarFiltroPerfis" actionListener="#{perfilBean.alterarExibicaoFiltro()}" 
+                       update=":formularios"/>
+                       </p:panelGrid>
+                
+                <p:panelGrid columns="3" style="padding: 3px;background: white;" rendered="#{perfilBean.filtroVisivel}">
+                    
+                    
+                    <p:outputLabel for="tipoFiltroIdPerfis" value="Código:" rendered="#{perfilBean.filtroVisivel}"/>
+                      <p:selectOneMenu id="tipoFiltroIdPerfis"  value="#{perfilBean.filtroTipoId}" rendered="#{perfilBean.filtroVisivel}">
+                      <f:selectItem itemLabel="é" itemValue="e" />
+                      <f:selectItem itemLabel="contém" itemValue="c" />
+                      </p:selectOneMenu>
+                      
+                      <p:inputText id="txtFiltroIdCategoria" value="#{perfilBean.filtroCampoId}" rendered="#{perfilBean.filtroVisivel}" />
+ 
+                      
+                      <p:outputLabel for="tipoFiltroDescPerfis" value="Descrição:" rendered="#{perfilBean.filtroVisivel}"/>
+                      <p:selectOneMenu id="tipoFiltroDescPerfis"  value="#{perfilBean.filtroTipoDesc}" rendered="#{perfilBean.filtroVisivel}">
+                      <f:selectItem itemLabel="é" itemValue="e" />
+                      <f:selectItem itemLabel="contém" itemValue="c" />
+                      </p:selectOneMenu>
+                      
+                      <p:inputText id="txtFiltroDescCategoria" value="#{perfilBean.filtroCampoDesc}" rendered="#{perfilBean.filtroVisivel}"/>
+ 
+                      </p:panelGrid> 
+                    
+                 
+        
+       
+                 <p:panelGrid columns="1"  rendered="#{perfilBean.filtroVisivel}"> 
+         <p:commandButton value="Consultar" id="btnConsultarPerfis" actionListener="#{perfilBean.consultar()}"  rendered="#{perfilBean.filtroVisivel}"
+                    icon="ui-icon-search"   update=":formularios" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+               
+               </p:panelGrid>
+                         
+                           </p:panelGrid>
+                         
+                 <p:spacer  height="35" />
+                  <p:panelGrid layout="grid" styleClass="painelTabela" columns="1" > 
+         <p:dataTable  style="width:95%"  var="perfis2" value="#{perfilBean.perfis}" selection="#{perfilBean.perfilSelecionado}" selectionMode="single" rowKey="#{perfis2.id}" emptyMessage="Nenhum registro encontrado."
+         rows="10"
+                         paginator="true"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        
+             
+         <f:facet name="header">
+            Perfis
+        </f:facet>
+      <p:ajax event="rowSelect"  listener="#{perfilBean.onRowSelect}"  update=":formularios" />
+       <p:ajax event="rowUnselect" listener="#{perfilBean.onRowUnselect}" update=":formularios" />
+           <!-- <p:column selectionMode="multiple" style="width:16px;text-align:center"/> -->
+    <p:column headerText="Código"  style="width:20%;"  sortBy="#{perfils2.id}">
+       
+        <p:commandLink value="#{perfis2.id}" actionListener="#{menuBean.setPagina('Perfis','detalhe','principal')}" update=":formularios"  >
+        <f:setPropertyActionListener value="#{perfis2}"
+                      target="#{perfilBean.perfil}"/>
+           <f:setPropertyActionListener value="#{perfis2}"
+                      target="#{perfilBean.perfilSelecionado}"/>
+        </p:commandLink>
+    </p:column>
+ 
+    <p:column headerText="Descrição" style="width:60%;" sortBy="#{perfis2.descricao}">
+  
+        <p:commandLink value="#{perfis2.descricao}" actionListener="#{menuBean.setPagina('Perfis','detalhe','principal')}" update=":formularios"  >
+             <f:setPropertyActionListener value="#{perfis2}"
+                      target="#{perfilBean.perfil}"/>
+              <f:setPropertyActionListener value="#{perfis2}"
+                      target="#{perfilBean.perfilSelecionado}"/>
+        </p:commandLink>
+   
+    </p:column>
+    
+    
+    <f:facet name="footer">
+        
+        <h:outputText value="Total de registros: #{perfilBean.totalRegistros}    " />
+        
+ 
+        </f:facet>
+       
+</p:dataTable>
+                      </p:panelGrid>
+             </center>
+              </ui:component>
+           </h:form>
+           
+           
+           
+           
+</ui:composition>

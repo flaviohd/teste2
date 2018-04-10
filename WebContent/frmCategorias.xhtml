@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+   
+        <h:form id="frmCategorias">
+          <ui:component>
+           
+             <center>
+               
+             <p:panelGrid layout="grid" styleClass="painelOperacoes" columns="1"  >
+                     
+             <p:panelGrid columns="2">
+                     
+             <p:commandButton value="Salvar" id="btnIncluiCategoriasSalvar" type="submit"  actionListener="#{categoriaBean.cadastrar(actionEvent)}"  
+                               update=":formularios"  icon="fa fa-check" ajax="true" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+             <p:commandButton value="Voltar" id="btnIncluiCategoriasCancelar" actionListener="#{menuBean.setPagina('Categorias','principal','detalhe')}" 
+                                update=":formularios" icon="fa fa-arrow-left" ajax="true" immediate="true" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+             </p:panelGrid> 
+            
+                 </p:panelGrid>
+                  <p:spacer  height="30" />
+                           
+                <p:panelGrid layout="grid" styleClass="painelTabela"   columns="1"  >
+                        
+              <p:tabView >
+                 <p:tab title="Categorias"> 
+          
+         <p:panelGrid columns="2">
+             
+   
+         <p:outputLabel for="codIncluiTiposCategorias" value="Código:" />
+         <p:inputText id="codIncluiTiposCategorias" value="#{categoriaBean.categoria.id}"  disabled="true" readonly="true" />
+ 
+         <p:outputLabel for="descIncluiTiposCategorias" value="Descrição:" />
+         <p:inputText id="descIncluiTiposCategorias"  value="#{categoriaBean.categoria.descricao}" maxlength="20" required="true"/>
+         
+        
+         
+         
+         
+         
+         </p:panelGrid>
+             
+                     
+      
+       
+       
+     
+    
+
+     
+      </p:tab>
+      </p:tabView>
+      </p:panelGrid> 
+        </center>
+ 
+              </ui:component>
+        </h:form>
+ 
+</ui:composition>

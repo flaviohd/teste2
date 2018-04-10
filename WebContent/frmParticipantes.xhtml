@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+   
+        <h:form id="frmParticipantes">
+          <ui:component>
+           
+             <center>
+               
+             <p:panelGrid layout="grid" styleClass="painelOperacoes" columns="1"  >
+                     
+             <p:panelGrid columns="2">
+                     
+             <p:commandButton value="Salvar" id="btnIncluiTiposParticipantesSalvar" type="submit"  actionListener="#{participanteBean.cadastrar(actionEvent)}"  
+                               update=":formularios"  icon="fa fa-check" ajax="true" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+             <p:commandButton value="Voltar" id="btnIncluiTiposParticipantesCancelar" actionListener="#{menuBean.setPagina('Participantes','principal','detalhe')}" 
+                                update=":formularios" icon="fa fa-arrow-left" ajax="true" immediate="true" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+             </p:panelGrid> 
+            
+                 </p:panelGrid>
+                  <p:spacer  height="30" />
+                           
+                <p:panelGrid layout="grid" styleClass="painelTabela"   columns="1"  >
+                        
+              <p:tabView >
+                 <p:tab title="Usuários"> 
+          
+         <p:panelGrid columns="2">
+             
+   
+         <p:outputLabel for="codIncluiTiposParticipantes" value="Id:" />
+         <p:inputText id="codIncluiTiposParticipantes" value="#{participanteBean.participante.id}"  disabled="true" readonly="true" />
+ 
+          <p:outputLabel for="nomeCompletoIncluiTiposParticipantes" value="Nome Completo:" />
+         <p:inputText id="nomeCompletoIncluiTiposParticipantes"  value="#{participanteBean.participante.nomeCompleto}" maxlength="20" required="true"/>
+         
+       
+           <p:outputLabel for="dataNascIncluiTiposParticipantes" value="Data de Nacimento:" />
+         <p:inputMask id="dataNascIncluiTiposParticipantes"  value="#{participanteBean.participante.dataNascimento}" maxlength="20" required="true" 
+          mask="99/99/9999">
+          <f:convertDateTime pattern="dd/mm/yyyy" />
+          </p:inputMask> 
+          
+
+         <p:outputLabel for="sexoIncluiTiposParticipantes" value="Sexo:" />
+          <p:selectOneMenu id="sexoIncluiTiposParticipantes" value="#{participanteBean.participante.sexo}"  required="true" >
+                  <f:selectItem itemLabel="Selecione" itemValue="" />
+             <f:selectItem itemLabel="Masculino" itemValue="M" />
+             <f:selectItem itemLabel="Feminino" itemValue="F" />
+        </p:selectOneMenu>
+        
+           <p:outputLabel for="emailIncluiTiposParticipantes" value="E-mail:" />
+         <p:inputText id="emailIncluiTiposParticipantes"  value="#{participanteBean.participante.email}" maxlength="20" required="true"/>
+         
+           <p:outputLabel for="telIncluiTiposParticipantes" value="Telefone:" />
+         <p:inputText id="telIncluiTiposParticipantes"  value="#{participanteBean.participante.telefone}" maxlength="20" required="true"/>
+         
+           <p:outputLabel for="cidadeIncluiTiposParticipantes" value="Cidade:" />
+          <p:inputText id="cidadeIncluiTiposParticipantes"  value="#{participanteBean.participante.cidade}" maxlength="20" required="true"/>
+         
+          <p:outputLabel for="escolaridadeIncluiParticipantes" value="Escolaridade:" />
+              <p:selectOneMenu id="escolaridadeIncluiParticipantes" value="#{participanteBean.participante.escolaridade}" converter="escolaridadeConverter" 
+                         required="true"  requiredMessage="O campo Escolaridade é obrigatório.">
+             <f:selectItem itemLabel="Selecione" itemValue="" />
+             <f:selectItems value="#{escolaridadeBean.escolaridades}" var="escolaridade" itemLabel="#{escolaridade.descricao}" />
+        </p:selectOneMenu>
+          
+          <p:outputLabel for="serieIncluiTiposParticipantes" value="Série:" />
+          <p:inputText id="serieIncluiTiposParticipantes"  value="#{participanteBean.participante.serie}" maxlength="20" required="true"/>
+         
+          
+          <p:outputLabel for="escolaIncluiTiposParticipantes" value="Escola:" />
+          <p:inputText id="escolaIncluiTiposParticipantes"  value="#{participanteBean.participante.escola}" maxlength="20" required="true"/>
+         
+          <p:outputLabel for="formacaoIncluiTiposParticipantes" value="Formação:" />
+          <p:inputText id="formacaoIncluiTiposParticipantes"  value="#{participanteBean.participante.formacao}" maxlength="20" required="true"/>
+         
+         
+          <p:outputLabel for="areaAtuacaoIncluiTiposParticipantes" value="Área de Atuação:" />
+          <p:inputText id="areaAtuacaoIncluiTiposParticipantes"  value="#{participanteBean.participante.areaAtuacao}" maxlength="20" required="true"/>
+         
+         <p:outputLabel for="instituicaoIncluiTiposParticipantes" value="Instituição:" />
+          <p:inputText id="instituicaoIncluiTiposParticipantes"  value="#{participanteBean.participante.instituicao}" maxlength="20" required="true"/>
+         
+     <p:outputLabel for="graduacacoIncluiTiposParticipantes" value="Graduação:" />
+          <p:inputText id="graduacacoIncluiTiposParticipantes"  value="#{participanteBean.participante.graduacao}" maxlength="20" required="true"/>
+
+    
+    
+         </p:panelGrid>
+             
+                     
+      
+       
+       
+     
+    
+
+     
+      </p:tab>
+      </p:tabView>
+      </p:panelGrid> 
+        </center>
+ 
+              </ui:component>
+        </h:form>
+ 
+</ui:composition>

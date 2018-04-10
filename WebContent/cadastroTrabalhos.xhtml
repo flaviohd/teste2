@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+ 
+        <h:head>
+            <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>SIMOTIC</title>
+            </f:facet>
+
+         
+            <style type="text/css">
+                .ui-widget{
+                  font-size: 14px; 
+                  font-family: 'Roboto', sans-serif; 
+                }
+               
+               
+                .ui-datatable tbody td{
+                    border-style: none;
+       
+                }
+                
+                 .ui-layout-unit{
+                                padding: 0px;
+                              
+                            }
+                            
+                 .ui-layout-unit .ui-layout-unit-content {
+                                padding: 0px;
+                                border: 0 none;
+                                overflow: auto;
+                                background: #f3f3f3;
+                            }
+                            
+                            .ui-widget-content {
+    border-style:none !important;
+    background: #fff;
+    color: #222;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+        border-style:none !important;
+    border-color: inherit;
+    /*padding: 4px 10px;*/
+}
+
+  .painelTabela{
+                     
+                            background: white;
+                              box-shadow: 1px 2px 3px 1px rgba(100, 100, 100, 0.2);
+                            -webkit-box-shadow: 1px 2px 3px 1px rgba(100, 100, 100, 0.2);
+                           /* border-radius: 1.0px !important;*/
+                           padding: 0px;
+                        
+                            }
+                            
+                            
+                            
+          .painelTabela .ui-panelgrid .ui-panelgrid-cell {
+    border-style: none !important;
+    padding: 0px !important;
+}
+                            
+                            .titulo {
+               
+                height: 100px;
+                
+                
+            }
+            
+            
+            .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+    
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+     border-bottom-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+}
+     
+     
+           .ui-tabs{
+		
+		padding:0px;
+                               position:relative;
+		zoom:1;
+		border: 1px solid #D5D5D5;
+		background:none;
+		min-height: 180px;
+		width: 100%;
+                  box-shadow: 0.5px 0px 1px 0px rgba(0, 0, 0, 0.2);
+                  font-size: 28px;
+		}
+	.ui-tabs .ui-tabs-nav{background:none;border:0;}
+	.ui-tabs .ui-tabs-nav li{
+		
+		list-style:none;
+		float:left;
+		position:relative;
+		margin:0 .2em 1px 0;
+		padding:0px;
+		white-space:nowrap;
+        border: 0px solid !important;}
+	.ui-tabs .ui-tabs-nav li a{float:left;padding:.5em 1em;text-decoration:none;font-size:16px;color: white;}
+	.ui-tabs .ui-tabs-nav li.ui-tabs-selected{margin-bottom:0;}
+	.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a{cursor:text;}
+	.ui-tabs .ui-tabs-nav li a,.ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a{cursor:pointer;}
+	.ui-tabs .ui-tabs-panel{border-width:0px !important;padding:1em 1.4em;background:#FFF;}
+	.ui-tabs.ui-tabs-top .ui-tabs-nav{
+		border-bottom:1px solid #D9D9D9;
+		background: rgb(16,108,200);
+               height: 35px;}
+		
+		.ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-tabs-selected{
+			padding-bottom:1px;
+			background: none;
+			color: white;
+			text-shadow: none;}
+	.ui-tabs.ui-tabs-bottom .ui-tabs-nav{border-top:1px solid #D9D9D9;}.ui-tabs.ui-tabs-bottom .ui-tabs-nav li.ui-tabs-selected{margin-top:-1px;padding-top:1px;}
+	.ui-tabs.ui-tabs-left .ui-tabs-nav{border-right:1px solid #D9D9D9;}
+	.ui-tabs.ui-tabs-left .ui-tabs-nav li.ui-tabs-selected{margin-right:-1px;padding-right:1px;}
+	.ui-tabs.ui-tabs-right .ui-tabs-nav{border-left:1px solid #D9D9D9;}
+	.ui-tabs.ui-tabs-right .ui-tabs-nav li.ui-tabs-selected{margin-left:-1px !important;padding-left:1px !important;}
+	.ui-tabs .ui-tabs-nav{padding:0px !important;border-radius:0px !important;}
+        
+        .ui-tabs.ui-widget-content:not(.ui-ribbon){
+            border: 1px solid #D5D5D5;
+        }
+        
+               
+            </style>
+              <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
+        </h:head>
+
+         
+            <p:layout fullPage="true" >
+
+              
+                  
+                <p:layoutUnit id="center" position="center" >
+              <center>
+           <p:outputPanel id="form_cadastro">
+           <h:form>
+           
+           <p:spacer height="50"></p:spacer>
+     <p:panelGrid layout="grid"  styleClass="painelTabela" columns="1" style="background:white;width:50%;">
+    
+       <p:panelGrid columns="1" styleClass="titulo" >
+       
+        <h:outputText  value="Preencha o formulário de cadastro:"/>
+       
+       </p:panelGrid>
+       
+    
+          <p:tabView >
+                 <p:tab title="Informações pessoais"> 
+        <p:panelGrid columns="2" style="width:60%;" > 
+        
+         
+              <p:outputLabel for="nomeCompletoIncluiTiposParticipantes" value="Nome Completo:" />
+         <p:inputText id="nomeCompletoIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.nomeCompleto}" maxlength="150" lenght="250" required="true"/>
+         
+       
+           <p:outputLabel for="dataNascIncluiTiposParticipantes" value="Data de Nacimento:" />
+         <p:inputMask id="dataNascIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.dataNascimento}" maxlength="20" required="true" 
+          mask="99/99/9999">
+          <f:convertDateTime pattern="dd/mm/yyyy" />
+          </p:inputMask> 
+          
+
+         <p:outputLabel for="sexoIncluiTiposParticipantes" value="Sexo:" />
+          <p:selectOneMenu id="sexoIncluiTiposParticipantes" value="#{trabalhoExternoBean.trabalho.responsavel.sexo}"  required="true" >
+                  <f:selectItem itemLabel="Selecione" itemValue="" />
+             <f:selectItem itemLabel="Masculino" itemValue="M" />
+             <f:selectItem itemLabel="Feminino" itemValue="F" />
+        </p:selectOneMenu>
+        
+           <p:outputLabel for="emailIncluiTiposParticipantes" value="E-mail:" />
+         <p:inputText id="emailIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.email}" length="60" required="true"/>
+         
+           <p:outputLabel for="telIncluiTiposParticipantes" value="Telefone:" />
+         <p:inputText id="telIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.telefone}" maxlength="20" required="true"/>
+         
+           <p:outputLabel for="cidadeIncluiTiposParticipantes" value="Cidade:" />
+          <p:inputText id="cidadeIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.cidade}" maxlength="20" required="true"/>
+         
+          <p:outputLabel for="escolaridadeIncluiParticipantes" value="Escolaridade:" />
+              <p:selectOneMenu id="escolaridadeIncluiParticipantes" value="#{trabalhoExternoBean.trabalho.responsavel.escolaridade}" converter="escolaridadeConverter" 
+                         required="true"  requiredMessage="O campo Escolaridade é obrigatório.">
+             <f:selectItem itemLabel="Selecione" itemValue="" />
+             <f:selectItems value="#{escolaridadeBean.escolaridades}" var="escolaridade" itemLabel="#{escolaridade.descricao}" />
+        </p:selectOneMenu>
+          
+          <p:outputLabel for="serieIncluiTiposParticipantes" value="Série:" />
+          <p:inputText id="serieIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.serie}" maxlength="20" required="true"/>
+         
+          
+          <p:outputLabel for="escolaIncluiTiposParticipantes" value="Escola:" />
+          <p:inputText id="escolaIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.escola}" maxlength="20" required="true"/>
+         
+          <p:outputLabel for="formacaoIncluiTiposParticipantes" value="Formação:" />
+          <p:inputText id="formacaoIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.formacao}" maxlength="20" required="true"/>
+         
+         
+          <p:outputLabel for="areaAtuacaoIncluiTiposParticipantes" value="Área de Atuação:" />
+          <p:inputText id="areaAtuacaoIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.areaAtuacao}" maxlength="20" required="true"/>
+         
+         <p:outputLabel for="instituicaoIncluiTiposParticipantes" value="Instituição:" />
+          <p:inputText id="instituicaoIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.instituicao}" maxlength="20" required="true"/>
+         
+     <p:outputLabel for="graduacacoIncluiTiposParticipantes" value="Graduação:" />
+          <p:inputText id="graduacacoIncluiTiposParticipantes"  value="#{trabalhoExternoBean.trabalho.responsavel.graduacao}" maxlength="20" required="true"/>
+                  </p:panelGrid>
+                
+              </p:tab>
+               </p:tabView>
+               
+               <p:tabView >
+               <p:tab title="Informações sobre o trabalho">
+                  <p:panelGrid columns="2" style="width:60%;" > 
+             <p:outputLabel for="campo_titulo" value="Título:" />
+              <p:inputText id="campo_titulo" value="#{trabalhoExternoBean.trabalho.titulo}"/>
+              
+               <p:outputLabel for="campoCategoria" value="Categoria:" />
+              <p:selectOneMenu id="campoCategoria" value="#{trabalhoExternoBean.trabalho.categoria}" converter="categoriaConverter" 
+                         required="true"  requiredMessage="O campo Categoria é obrigatório.">
+             <f:selectItem itemLabel="Selecione" itemValue="" />
+             <f:selectItems value="#{categoriaBean.categorias}" var="categoria" itemLabel="#{categoria.descricao}" />
+        </p:selectOneMenu>
+              
+               <p:outputLabel for="campo_area" value="Área:" />
+              <p:inputText id="campo_area" value="#{trabalhoExternoBean.trabalho.area}"/>
+              
+                <p:outputLabel for="campo_tema" value="Tema:" />
+              <p:inputText id="campo_tema" value="#{trabalhoExternoBean.trabalho.tema}"/>
+              
+               <p:outputLabel for="campo_resumo" value="Resumo:" />
+              <p:inputText id="campo_resumo" value="#{trabalhoExternoBean.trabalho.resumo}"/>
+              
+               <p:outputLabel for="campo_orientador" value="Orientador:" />
+              <p:inputText id="campo_orientador" value="#{trabalhoExternoBean.trabalho.orientador}"/>
+              
+               <p:outputLabel for="campo_palavra_chave1" value="Palavra-chave1:" />
+              <p:inputText id="campo_palavra_chave1" value="#{trabalhoExternoBean.trabalho.palavraChave1}"/>
+              
+               <p:outputLabel for="campo_palavra_chave2" value="Palavra-chave2:" />
+              <p:inputText id="campo_palavra_chave2" value="#{trabalhoExternoBean.trabalho.palavraChave2}"/>
+              
+              <p:outputLabel for="campo_palavra_chave3" value="Palavra-chave3:" />
+              <p:inputText id="campo_palavra_chave3" value="#{trabalhoExternoBean.trabalho.palavraChave3}"/>
+  
+              </p:panelGrid>
+               
+               
+                 </p:tab>
+                  </p:tabView>
+                  
+                 
+                  <p:tabView>
+                   <p:tab title="Integrantes">
+                  
+            
+             
+         <p:panelGrid colums="1" >
+              <p:panelGrid colums="1">
+                       <p:commandButton  style="width: 150px;padding: 4px;"  actionListener="#{trabalhoExternoBean.adicionaParticipante()}"   
+            value="Adicionar Participante"    update="form_cadastro" immediate="true"
+             ajax="true"  ></p:commandButton> 
+        
+             
+                
+                </p:panelGrid>
+               
+                <p:panelGrid colums="1">
+                <p:spacer height="20"/>
+              <p:repeat value="#{trabalhoExternoBean.trabalho.participantes}" var="participante">
+        <p:outputPanel>
+                <p:panelGrid columns="4" cellpadding="5">
+                    <p:outputLabel  value="Nome Completo:" />
+                    <p:inputText value="#{participante.nomeCompleto}" style="font-weight: bold"/>
+ 
+                     <p:outputLabel for="dataNascParticipante" value="Data de Nacimento:" />
+         			<p:inputMask id="dataNascParticipante"  value="#{participante.dataNascimento}" maxlength="20" required="true" 
+         			 mask="99/99/9999">
+          			<f:convertDateTime pattern="dd/mm/yyyy" />
+          			</p:inputMask>   
+                   
+                     <p:outputLabel value="Sexo:" />
+                     <p:inputText  value="#{participante.sexo}" style="font-weight: bold"/>
+ 
+  					 <p:outputLabel value="E-mail:" />
+                      <p:inputText  value="#{participante.email}" style="font-weight: bold"/>
+ 
+  					 <p:outputLabel value="Telefone:" />
+                     <p:inputText  value="#{participante.telefone}" style="font-weight: bold"/>
+ 
+          
+               
+                </p:panelGrid>
+                <hr></hr>
+            </p:outputPanel>
+            
+        </p:repeat>
+         </p:panelGrid>
+         
+            </p:panelGrid>
+         </p:tab>
+        </p:tabView>
+                 
+        <p:spacer height="50"/>
+      <p:commandButton icon="fa fa-sign-in" style="width: 150px;padding: 4px;"  actionListener="#{trabalhoExternoBean.cadastrar(actionEvent)}"   
+            value="Enviar"   styleClass="item"  update="form_cadastro"
+             ajax="true"  ></p:commandButton>
+       <p:spacer height="20"/>
+            </p:panelGrid>
+            
+                        
+             <p:spacer height="100"/>
+          
+            
+             
+
+          
+               
+           
+               
+                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                  </h:form>
+                 </p:outputPanel>
+                 
+         </center>  
+
+              
+                  
+                </p:layoutUnit>
+                
+   </p:layout>
+
+
+</html>

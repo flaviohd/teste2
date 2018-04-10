@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+    <title>login</title>
+    <!--
+            <style type="text/css">
+                .ui-layout-north {
+                    z-index:20 !important;
+                    overflow:visible !important;;
+                }
+              
+                .ui-corner-all {
+                    border-radius: 1px;
+                }
+                
+                .ui-widget {
+                    /*font-family: Tahoma,Verdana,Segoe,sans-serif;*/
+                    font-size: 14px;
+                 }
+                 
+                 .painel .ui-panelgrid-cell{
+                     padding: 0px !important;
+                      background-color:  #e5ebee;
+                     
+                    
+                     
+                     
+                 }
+                 
+                 .rectangle{
+                
+                      width:26px;
+                      height:26px;
+                       text-align: center;
+                     vertical-align: middle;
+                   
+                 }
+                 
+                 .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+    background: #f5f5f5;
+    -moz-box-shadow: inset 0 2px 2px #8f8f8f;
+    -webkit-box-shadow: inset 0 2px 2px #8f8f8f;
+    box-shadow: inset 0 1px 0.5px #b7b7b7;
+    color: #4A4A4A;
+}
+
+                 
+                 .painel i{
+                 
+                      width:26px;
+                      color: #8c8c8c;
+                       text-align: center;
+                    
+                 }
+                 .ui-layout-unit{
+                     padding: 0.0em; 
+                   
+                 }
+                 
+                 .ui-button, button.ui-button.ui-state-default, .ui-button.ui-state-default {
+    border: 1px solid  #86b685;
+    color: #FFF;
+    font-size: 12px;
+    box-shadow: 0 1px 0 #74cb85 inset, 0 1px 2px rgba(0,0,0,0.2) !important;
+    background: #45a74d;
+    background: -moz-linear-gradient(top, #6bc087 0%, #53b451 100%);
+    padding: 2px 10px;
+}
+
+
+                 
+                 .ui-layout-unit-content{
+               /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9f9f9+0,f6f8f9+0,e5ebee+100,d7dee3+100,e4e5e4+100 */
+background: #f9f9f9; /* Old browsers */
+background: -moz-linear-gradient(top,  #f9f9f9 0%, #f6f8f9 0%, #e5ebee 100%, #d7dee3 100%, #e4e5e4 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #f9f9f9 0%,#f6f8f9 0%,#e5ebee 100%,#d7dee3 100%,#e4e5e4 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #f9f9f9 0%,#fefefe 0%,#e3e3e3 100%,#d7dee3 100%,#e4e5e4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#e4e5e4',GradientType=0 ); /* IE6-9 */
+
+          }
+
+              
+                
+                
+                 
+                 
+                
+            </style>
+    -->
+    
+     <style type="text/css">
+    
+     .painelLogin{
+                   background: white;
+                   width: 25%;
+                       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+                 }
+                 
+          .ui-layout-unit{
+                     padding: 0.0em; 
+                   
+                 }
+                 
+                 
+      .ui-layout-unit .ui-layout-unit-content {
+    padding: 0px;
+    border: 0 none;
+    overflow: auto;
+    background: #f3f3f3;
+    font-family: 'Roboto', sans-serif;
+}
+
+.ui-widget {
+        font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+
+    </style>
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    
+</h:head>
+<h:body>
+    <p:layout fullPage="true" >
+        <p:layoutUnit id="center" position="center" >
+             
+    <center>
+    <h:form>
+       <p:spacer height="150" />
+         <p:outputPanel id="login" > 
+        <h:panelGrid columns="1"  cellpadding="5">
+           <h:outputText  value="SIMOTIC" style="font-size:44px;color:rgb(67, 113, 179);" />      
+        </h:panelGrid>
+        <br></br>
+        
+        
+      
+            <p:panel styleClass="painelLogin"  >
+          
+                 <h:panelGrid columns="1"  cellpadding="10">
+          <p:graphicImage  value="/Imagens/icone_usuario.png" height="66" width="72"     />
+        </h:panelGrid>
+                
+        <p:panelGrid columns="3"  styleClass="painel" >
+           
+            <div styleClass="rectangle" >
+              <i class="fa fa-user" aria-hidden="true" ></i>
+              </div>
+            <p:inputText  styleClass="txtLogin" id="usuario" value="#{login.usuario}"  size="25" required="true" rendered="#{login.mostraFormUsuarioSenha}"
+                     requiredMessage="É necessário informar o nome de usuário."></p:inputText>
+                 <p:watermark  for="usuario"  value="Usuário" id="marca_usuario" />
+         </p:panelGrid>
+ 
+                 <p:spacer height="2"></p:spacer>
+            <p:panelGrid columns="3"  styleClass="painel" >
+            <div styleClass="rectangle" >
+               <i class="fa fa-key" aria-hidden="true" ></i>
+               </div>
+        <p:password styleClass="txtLogin"  id="senha" value="#{login.senha}" size="25" required="true" rendered="#{login.mostraFormUsuarioSenha}"
+                    requiredMessage="É necessário informar a senha." ></p:password >
+            <p:watermark  for="senha"  value="Senha" id="marca_senha" />
+            </p:panelGrid>
+              <p:spacer height="5"></p:spacer>
+         <p:outputLabel   for="novaSenha" value="Nova senha:" rendered="#{login.mostraFormAltSenha}"/>
+         <p:password styleClass="txtLogin" id="novaSenha" value="#{login.novaSenha}" required="true" match="repeteNovaSenha" rendered="#{login.mostraFormAltSenha}" >
+               <f:validator validatorId="SenhaValidador" />
+         </p:password>
+         <p:outputLabel  styleClass="txtLogin"  for="repeteNovaSenha" value="Repetir nova senha:" rendered="#{login.mostraFormAltSenha}" />
+         <p:password id="repeteNovaSenha" value="#{login.novaSenha}" required="true" 
+                      rendered="#{login.mostraFormAltSenha}" />
+      
+           
+             <h:panelGrid columns="1"  cellpadding="10">  
+        <p:commandButton icon="fa fa-sign-in" style="width: 222px;padding: 4px;" action="#{login.validateUsuarioSenha}"  rendered="#{login.mostraFormUsuarioSenha}" 
+            value="Entrar" styleClass="botao" 
+             ajax="true" update="login" ></p:commandButton> 
+                </h:panelGrid>
+                  <h:panelGrid columns="1"  cellpadding="0"> 
+                  <p:commandLink value="Esqueceu sua senha?" style="color:gray;"  ></p:commandLink>
+            </h:panelGrid>
+            
+            <h:panelGrid columns="2"  cellpadding="5">  
+            <p:commandButton action="#{login.confirmarSenha}" rendered="#{login.mostraFormAltSenha}"
+            value="Confirmar" styleClass="ui-priority-primary" 
+             ajax="true" update="login" ></p:commandButton> 
+            <p:commandButton action="#{login.cancelaAlteracaoSenha()}" immediate="true"
+            value="Cancelar" styleClass="ui-priority-primary" rendered="#{login.mostraFormAltSenha}"
+             ajax="true" update="login" ></p:commandButton> 
+               </h:panelGrid>
+           
+        </p:panel>
+              
+
+         <p:messages id="msgsLogin" showSummary="false"  showDetail="true" style="width:46%;position: absolute;
+               left: 28%;
+                  bottom: 24%;"/>
+           
+          </p:outputPanel>
+          </h:form> 
+        
+            
+     
+    
+
+            <h:panelGrid  columns="1"  cellpadding="1" 
+                         style="text-align: center;
+                                position: absolute;
+                                bottom: 20px;
+                                left: 30%;
+                                width: 40%;font-size: 11px;">
+                
+                <p:graphicImage  value="/Imagens/brasao.png"     />
+        <h:outputText  value="Diretoria de Tecnologia da Informação"  />
+        
+             
+        <h:outputText  value="Departamento de Desenvolvimento de Sistemas" />
+                 
+  
+        <h:outputText   value="Prefeitura Municipal de São Leopoldo"  />
+                 </h:panelGrid> 
+        </center>
+                
+            </p:layoutUnit>
+        </p:layout>
+</h:body>
+     
+</html>

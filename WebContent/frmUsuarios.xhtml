@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+   
+        <h:form id="frmUsuarios">
+          <ui:component>
+           
+             <center>
+               
+             <p:panelGrid layout="grid" styleClass="painelOperacoes" columns="1"  >
+                     
+             <p:panelGrid columns="2">
+                     
+             <p:commandButton value="Salvar" id="btnIncluiTiposUsuariosSalvar" type="submit"  actionListener="#{usuarioBean.cadastrar(actionEvent)}"  
+                               update=":formularios"  icon="fa fa-check" ajax="true" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+             <p:commandButton value="Voltar" id="btnIncluiTiposUsuariosCancelar" actionListener="#{menuBean.setPagina('Usuarios','principal','detalhe')}" 
+                                update=":formularios" icon="fa fa-arrow-left" ajax="true" immediate="true" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+             </p:panelGrid> 
+            
+                 </p:panelGrid>
+                  <p:spacer  height="30" />
+                           
+                <p:panelGrid layout="grid" styleClass="painelTabela"   columns="1"  >
+                        
+              <p:tabView >
+                 <p:tab title="Usuários"> 
+          
+         <p:panelGrid columns="2">
+             
+   
+         <p:outputLabel for="codIncluiTiposUsuarios" value="Id:" />
+         <p:inputText id="codIncluiTiposUsuarios" value="#{usuarioBean.usuario.id}"  disabled="true" readonly="true" />
+ 
+         <p:outputLabel for="nomeUsuarioIncluiTiposUsuarios" value="Nome de Usuário:" />
+         <p:inputText id="nomeUsuarioIncluiTiposUsuarios"  value="#{usuarioBean.usuario.nomeUsuario}" maxlength="20" lenght="250"  required="true"/>
+         
+          <p:outputLabel for="nomeCompletoIncluiTiposUsuarios" value="Nome Completo:" />
+         <p:inputText id="nomeCompletoIncluiTiposUsuarios"  value="#{usuarioBean.usuario.nomeCompleto}" maxlength="20" required="true"/>
+         
+          <p:outputLabel for="senhaIncluiTiposUsuarios" value="Senha:" />
+         <p:inputText id="senhaIncluiTiposUsuarios"  value="#{usuarioBean.usuario.senha}" maxlength="20" required="true"/>
+         
+           <p:outputLabel for="dataCriacaoIncluiTiposUsuarios" value="Data da Criação:" />
+         <p:inputMask id="dataCriacaoIncluiTiposUsuarios"  value="#{usuarioBean.usuario.dataCriacao}" maxlength="20" required="true" 
+          mask="99/99/9999">
+          <f:convertDateTime pattern="dd/mm/yyyy" />
+          </p:inputMask> 
+           <p:outputLabel for="emailIncluiTiposUsuarios" value="E-mail:" />
+         <p:inputText id="emailIncluiTiposUsuarios"  value="#{usuarioBean.usuario.email}" maxlength="20" required="true"/>
+         
+           <p:outputLabel for="ativoIncluiTiposUsuarios" value="Ativo:" />
+          <p:selectOneMenu id="ativoIncluiTiposUsuarios" value="#{usuarioBean.usuario.ativo}"  required="true" >
+                  <f:selectItem itemLabel="Selecione" itemValue="" />
+             <f:selectItem itemLabel="Sim" itemValue="S" />
+             <f:selectItem itemLabel="Não" itemValue="N" />
+        </p:selectOneMenu>
+        
+        <p:outputLabel for="alterarSenhaIncluiTiposUsuarios" value="Alterar senha?" />
+          <p:selectOneMenu id="alterarSenhaIncluiTiposUsuarios" value="#{usuarioBean.usuario.alterarSenha}"  required="true" >
+                  <f:selectItem itemLabel="Selecione" itemValue="" />
+             <f:selectItem itemLabel="Sim" itemValue="S" />
+             <f:selectItem itemLabel="Não" itemValue="N" />
+        </p:selectOneMenu>
+        
+           <p:outputLabel for="qtdAcessoErroIncluiTiposUsuarios" value="Quantidade de tentativas de acesso:" />
+         <p:inputText id="qtdAcessoErroIncluiTiposUsuarios"  value="#{usuarioBean.usuario.qtdTentativasAcesso}" maxlength="20" required="true"/>
+         
+         
+          <p:outputLabel for="perfilIncluiUsuarios" value="Perfil:" />
+              <p:selectOneMenu id="perfilIncluiUsuarios" value="#{usuarioBean.usuario.perfil}" converter="perfilConverter" 
+                         required="true"  requiredMessage="O campo Categoria é obrigatório.">
+             <f:selectItem itemLabel="Selecione" itemValue="" />
+             <f:selectItems value="#{perfilBean.perfis}" var="perfil" itemLabel="#{perfil.descricao}" />
+        </p:selectOneMenu>
+          
+         
+         
+         </p:panelGrid>
+             
+                     
+      
+       
+       
+     
+    
+
+     
+      </p:tab>
+      </p:tabView>
+      </p:panelGrid> 
+        </center>
+ 
+              </ui:component>
+        </h:form>
+ 
+</ui:composition>

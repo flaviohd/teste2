@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+       <h:form id="listaUsuarios">
+             <ui:component>
+            <center>
+                
+            
+             <p:panelGrid columns="1" layout="grid"  styleClass="painelOperacoes" >
+                 
+                   <p:panelGrid columns="3">
+                    
+                 <p:commandButton    icon="fa fa-file-text"   value="Incluir" id="btnIncluirUsuarios"  action="#{usuarioBean.preparaCadastro()}" actionListener="#{menuBean.setPagina('Usuarios','detalhe','principal')}" 
+                                    update=":formularios"  
+                       onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+          <p:commandButton icon="fa fa-pencil-square-o"  value="Editar" id="btnEditarUsuarios"  action="#{usuarioBean.preparaAlteracao()}" actionListener="#{menuBean.setPagina('Usuarios','detalhe','principal')}" update=":formularios"  
+                           onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+            
+          <p:commandButton icon="fa fa-trash" value="Excluir" id="btnExcluirUsuarios" actionListener="#{usuarioBean.excluir(actionEvent)}"
+                            update=":formularios"
+                           onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" > 
+                        
+                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+           </p:commandButton>
+        
+           </p:panelGrid> 
+                
+              
+                         <p:separator styleClass="separador"  />
+ 
+            
+ 
+                   
+                      <p:panelGrid columns="1"  > 
+                 <p:commandButton value="#{usuarioBean.textoBotaoConsulta}"  icon="#{usuarioBean.botaoIcone}" id="btnAlterarFiltroUsuarios" actionListener="#{usuarioBean.alterarExibicaoFiltro()}" 
+                       update=":formularios"/>
+                       </p:panelGrid>
+                
+                <p:panelGrid columns="3" style="padding: 3px;background: white;" rendered="#{usuarioBean.filtroVisivel}">
+                    
+                    
+                    <p:outputLabel for="tipoFiltroIdUsuarios" value="Código:" rendered="#{usuarioBean.filtroVisivel}"/>
+                      <p:selectOneMenu id="tipoFiltroIdUsuarios"  value="#{usuarioBean.filtroTipoId}" rendered="#{usuarioBean.filtroVisivel}">
+                      <f:selectItem itemLabel="é" itemValue="e" />
+                      <f:selectItem itemLabel="contém" itemValue="c" />
+                      </p:selectOneMenu>
+                      
+                      <p:inputText id="txtFiltroIdUsuario" value="#{usuarioBean.filtroCampoId}" rendered="#{usuarioBean.filtroVisivel}" />
+ 
+                      
+                      <p:outputLabel for="tipoFiltroDescUsuarios" value="Descrição:" rendered="#{usuarioBean.filtroVisivel}"/>
+                      <p:selectOneMenu id="tipoFiltroDescUsuarios"  value="#{usuarioBean.filtroTipoDesc}" rendered="#{usuarioBean.filtroVisivel}">
+                      <f:selectItem itemLabel="é" itemValue="e" />
+                      <f:selectItem itemLabel="contém" itemValue="c" />
+                      </p:selectOneMenu>
+                      
+                      <p:inputText id="txtFiltroDescUsuario" value="#{usuarioBean.filtroCampoDesc}" rendered="#{usuarioBean.filtroVisivel}"/>
+ 
+                      </p:panelGrid> 
+                    
+                 
+        
+       
+                 <p:panelGrid columns="1"  rendered="#{usuarioBean.filtroVisivel}"> 
+         <p:commandButton value="Consultar" id="btnConsultarUsuarios" actionListener="#{usuarioBean.consultar()}"  rendered="#{usuarioBean.filtroVisivel}"
+                    icon="ui-icon-search"   update=":formularios" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+               
+               </p:panelGrid>
+                         
+                           </p:panelGrid>
+                         
+                 <p:spacer  height="35" />
+                  <p:panelGrid layout="grid" styleClass="painelTabela" columns="1" > 
+         <p:dataTable  style="width:95%"  var="usuarios2" value="#{usuarioBean.usuarios}" selection="#{usuarioBean.usuarioSelecionado}" selectionMode="single" rowKey="#{usuarios2.id}" emptyMessage="Nenhum registro encontrado."
+         rows="10"
+                         paginator="true"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        
+             
+         <f:facet name="header">
+            Usuarios
+        </f:facet>
+      <p:ajax event="rowSelect"  listener="#{usuarioBean.onRowSelect}"  update=":formularios" />
+       <p:ajax event="rowUnselect" listener="#{usuarioBean.onRowUnselect}" update=":formularios" />
+           <!-- <p:column selectionMode="multiple" style="width:16px;text-align:center"/> -->
+    <p:column headerText="Código"  style="width:20%;"  sortBy="#{usuarios2.id}">
+       
+        <p:commandLink value="#{usuarios2.id}" actionListener="#{menuBean.setPagina('Usuarios','detalhe','principal')}" update=":formularios"  >
+        <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuario}"/>
+           <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuarioSelecionado}"/>
+        </p:commandLink>
+    </p:column>
+ 
+    <p:column headerText="Nome de Usuário" style="width:60%;" sortBy="#{usuarios2.nomeUsuario}">
+  
+        <p:commandLink value="#{usuarios2.nomeUsuario}" actionListener="#{menuBean.setPagina('Usuarios','detalhe','principal')}" update=":formularios"  >
+             <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuario}"/>
+              <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuarioSelecionado}"/>
+        </p:commandLink>
+   
+    </p:column>
+    
+    <p:column headerText="Nome Completo" style="width:60%;" sortBy="#{usuarios2.nomeCompleto}">
+  
+        <p:commandLink value="#{usuarios2.nomeCompleto}" actionListener="#{menuBean.setPagina('Usuarios','detalhe','principal')}" update=":formularios"  >
+             <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuario}"/>
+              <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuarioSelecionado}"/>
+        </p:commandLink>
+   
+    </p:column>
+    
+     <p:column headerText="Data cadastro" style="width:60%;" sortBy="#{usuarios2.dataCriacao}">
+  
+        <p:commandLink value="#{usuarios2.dataCriacao}" actionListener="#{menuBean.setPagina('Usuarios','detalhe','principal')}" update=":formularios"  >
+             <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuario}"/>
+              <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuarioSelecionado}"/>
+        </p:commandLink>
+   
+    </p:column>
+    
+     <p:column headerText="E-mail" style="width:60%;" sortBy="#{usuarios2.email}">
+  
+        <p:commandLink value="#{usuarios2.email}" actionListener="#{menuBean.setPagina('Usuarios','detalhe','principal')}" update=":formularios"  >
+             <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuario}"/>
+              <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuarioSelecionado}"/>
+        </p:commandLink>
+   
+    </p:column>
+    
+    <p:column headerText="Ativo" style="width:60%;" sortBy="#{usuarios2.ativo}">
+  
+        <p:commandLink value="#{usuarios2.ativo}" actionListener="#{menuBean.setPagina('Usuarios','detalhe','principal')}" update=":formularios"  >
+             <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuario}"/>
+              <f:setPropertyActionListener value="#{usuarios2}"
+                      target="#{usuarioBean.usuarioSelecionado}"/>
+        </p:commandLink>
+   
+    </p:column>
+    
+ 
+    
+    <f:facet name="footer">
+        
+        <h:outputText value="Total de registros: #{usuarioBean.totalRegistros}    " />
+        
+ 
+        </f:facet>
+       
+</p:dataTable>
+                      </p:panelGrid>
+             </center>
+              </ui:component>
+           </h:form>
+           
+           
+           
+           
+</ui:composition>

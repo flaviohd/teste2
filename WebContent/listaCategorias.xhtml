@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+       <h:form id="listaCategorias">
+             <ui:component>
+            <center>
+                
+            
+             <p:panelGrid columns="1" layout="grid"  styleClass="painelOperacoes" >
+                 
+                   <p:panelGrid columns="3">
+                    
+                 <p:commandButton    icon="fa fa-file-text"   value="Incluir" id="btnIncluirCategorias"  action="#{categoriaBean.preparaCadastro()}" actionListener="#{menuBean.setPagina('Categorias','detalhe','principal')}" 
+                                    update=":formularios"  
+                       onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+          <p:commandButton icon="fa fa-pencil-square-o"  value="Editar" id="btnEditarCategorias"  action="#{categoriaBean.preparaAlteracao()}" actionListener="#{menuBean.setPagina('Categorias','detalhe','principal')}" update=":formularios"  
+                           onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+            
+          <p:commandButton icon="fa fa-trash" value="Excluir" id="btnExcluirCategorias" actionListener="#{categoriaBean.excluir(actionEvent)}"
+                            update=":formularios"
+                           onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" > 
+                        
+                <p:confirm header="Confirmação" message="Deseja realmente excluir?" icon="ui-icon-alert" />
+           </p:commandButton>
+        
+           </p:panelGrid> 
+                
+              
+                         <p:separator styleClass="separador"  />
+ 
+            
+ 
+                   
+                      <p:panelGrid columns="1"  > 
+                 <p:commandButton value="#{categoriaBean.textoBotaoConsulta}"  icon="#{categoriaBean.botaoIcone}" id="btnAlterarFiltroCategorias" actionListener="#{categoriaBean.alterarExibicaoFiltro()}" 
+                       update=":formularios"/>
+                       </p:panelGrid>
+                
+                <p:panelGrid columns="3" style="padding: 3px;background: white;" rendered="#{categoriaBean.filtroVisivel}">
+                    
+                    
+                    <p:outputLabel for="tipoFiltroIdCategorias" value="Código:" rendered="#{categoriaBean.filtroVisivel}"/>
+                      <p:selectOneMenu id="tipoFiltroIdCategorias"  value="#{categoriaBean.filtroTipoId}" rendered="#{categoriaBean.filtroVisivel}">
+                      <f:selectItem itemLabel="é" itemValue="e" />
+                      <f:selectItem itemLabel="contém" itemValue="c" />
+                      </p:selectOneMenu>
+                      
+                      <p:inputText id="txtFiltroIdCategoria" value="#{categoriaBean.filtroCampoId}" rendered="#{categoriaBean.filtroVisivel}" />
+ 
+                      
+                      <p:outputLabel for="tipoFiltroDescCategorias" value="Descrição:" rendered="#{categoriaBean.filtroVisivel}"/>
+                      <p:selectOneMenu id="tipoFiltroDescCategorias"  value="#{categoriaBean.filtroTipoDesc}" rendered="#{categoriaBean.filtroVisivel}">
+                      <f:selectItem itemLabel="é" itemValue="e" />
+                      <f:selectItem itemLabel="contém" itemValue="c" />
+                      </p:selectOneMenu>
+                      
+                      <p:inputText id="txtFiltroDescCategoria" value="#{categoriaBean.filtroCampoDesc}" rendered="#{categoriaBean.filtroVisivel}"/>
+ 
+                      </p:panelGrid> 
+                    
+                 
+        
+       
+                 <p:panelGrid columns="1"  rendered="#{categoriaBean.filtroVisivel}"> 
+         <p:commandButton value="Consultar" id="btnConsultarCategorias" actionListener="#{categoriaBean.consultar()}"  rendered="#{categoriaBean.filtroVisivel}"
+                    icon="ui-icon-search"   update=":formularios" onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+               
+               </p:panelGrid>
+                         
+                           </p:panelGrid>
+                         
+                 <p:spacer  height="35" />
+                  <p:panelGrid layout="grid" styleClass="painelTabela" columns="1" > 
+         <p:dataTable  style="width:95%"  var="categorias2" value="#{categoriaBean.categorias}" selection="#{categoriaBean.categoriaSelecionado}" selectionMode="single" rowKey="#{categorias2.id}" emptyMessage="Nenhum registro encontrado."
+         rows="10"
+                         paginator="true"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                        
+             
+         <f:facet name="header">
+            Categorias
+        </f:facet>
+      <p:ajax event="rowSelect"  listener="#{categoriaBean.onRowSelect}"  update=":formularios" />
+       <p:ajax event="rowUnselect" listener="#{categoriaBean.onRowUnselect}" update=":formularios" />
+           <!-- <p:column selectionMode="multiple" style="width:16px;text-align:center"/> -->
+    <p:column headerText="Código"  style="width:20%;"  sortBy="#{categorias2.id}">
+       
+        <p:commandLink value="#{categorias2.id}" actionListener="#{menuBean.setPagina('Categorias','detalhe','principal')}" update=":formularios"  >
+        <f:setPropertyActionListener value="#{categorias2}"
+                      target="#{categoriaBean.categoria}"/>
+           <f:setPropertyActionListener value="#{categorias2}"
+                      target="#{categoriaBean.categoriaSelecionado}"/>
+        </p:commandLink>
+    </p:column>
+ 
+    <p:column headerText="Descrição" style="width:60%;" sortBy="#{categorias2.descricao}">
+  
+        <p:commandLink value="#{categorias2.descricao}" actionListener="#{menuBean.setPagina('Categorias','detalhe','principal')}" update=":formularios"  >
+             <f:setPropertyActionListener value="#{categorias2}"
+                      target="#{categoriaBean.categoria}"/>
+              <f:setPropertyActionListener value="#{categorias2}"
+                      target="#{categoriaBean.categoriaSelecionado}"/>
+        </p:commandLink>
+   
+    </p:column>
+    
+    
+    <f:facet name="footer">
+        
+        <h:outputText value="Total de registros: #{categoriaBean.totalRegistros}    " />
+        
+ 
+        </f:facet>
+       
+</p:dataTable>
+                      </p:panelGrid>
+             </center>
+              </ui:component>
+           </h:form>
+           
+           
+           
+           
+</ui:composition>
